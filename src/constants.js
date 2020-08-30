@@ -9,6 +9,12 @@ exports.ExitCode = {
   SUCCESS: 0,
 };
 
+exports.DataFileName = {
+  titles: `data/titles.txt`,
+  categories: `data/categories.txt`,
+  sentences: `data/sentences.txt`,
+};
+
 exports.MAX_ADS_NUMBER = 1000;
 
 exports.DEFAULT_PORT = 3000;
@@ -58,4 +64,5 @@ exports.HELP_MESSAGE = `
   --version:            выводит номер версии
   --help:               печатает этот текст
   --generate <count>    формирует файл mocks.json
+  --server <port>       запускает веб-сервер на указаном порте
 `;
