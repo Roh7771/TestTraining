@@ -23,4 +23,7 @@ app.use(`/my`, myRouter);
 app.use(`/offers`, offersRouter);
 app.use(`/search`, searchRouter);
 
+app.use((req, res) => res.status(400).render(`errors/400`));
+app.use((err, req, res) => res.status(500).render(`errors/500`));
+
 app.listen(DEFAULT_EXPRESS_PORT);
