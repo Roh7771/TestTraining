@@ -21,10 +21,6 @@ exports.DEFAULT_PORT = 3000;
 
 exports.DEFAULT_EXPRESS_PORT = 8080;
 
-exports.ROUTE = {
-  ROOT: `/`
-};
-
 exports.NOT_FOUND_MESSAGE = `Ничего не найдено`;
 
 exports.HttpCode = {

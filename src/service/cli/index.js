@@ -3,7 +3,7 @@
 const version = require(`./version`);
 const help = require(`./help`);
 const generate = require(`./generate`);
-const server = require(`./server`);
+const server = require(`./server/server`);
 
 const cli = {
   [version.name]: version,
