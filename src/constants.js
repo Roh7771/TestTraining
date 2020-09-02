@@ -13,6 +13,7 @@ exports.DataFileName = {
   titles: `data/titles.txt`,
   categories: `data/categories.txt`,
   sentences: `data/sentences.txt`,
+  comments: `data/comments.txt`
 };
 
 exports.MAX_ADS_NUMBER = 1000;
@@ -22,6 +23,8 @@ exports.DEFAULT_PORT = 3000;
 exports.DEFAULT_EXPRESS_PORT = 8080;
 
 exports.NOT_FOUND_MESSAGE = `Ничего не найдено`;
+
+exports.MAX_ID_LENGTH = 6;
 
 exports.HttpCode = {
   OK: 200,
@@ -46,6 +49,11 @@ exports.SumRestrict = {
 exports.PictureRestrict = {
   MIN: 1,
   MAX: 16,
+};
+
+exports.CommentRestrict = {
+  MAX_SENTENCES_AMOUNT: 3,
+  MAX_COMMENTS_AMOUNT: 5,
 };
 
 exports.MOCKS_FILE_NAME = `mocks.json`;
