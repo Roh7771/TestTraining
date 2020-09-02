@@ -8,12 +8,12 @@ const {
   HttpCode,
   NOT_FOUND_MESSAGE,
 } = require(`../../../constants`);
-const offersRouter = require(`./routes/offers-routes`);
+const routes = require(`./api`);
 
 const app = express();
 
 app.use(express.json());
-app.use(`/offers`, offersRouter);
+app.use(`/api`, routes);
 app.use((req, res) => res.status(HttpCode.NOT_FOUND).send(NOT_FOUND_MESSAGE));
 
 module.exports = {
