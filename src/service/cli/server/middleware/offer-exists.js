@@ -5,15 +5,15 @@ const {HttpCode} = require(`../../../../constants`);
 module.exports = (service) => (req, res, next) => {
   const {offerId} = req.params;
 
-  const ad = service.findOne(offerId);
+  const offer = service.findOne(offerId);
 
-  if (!ad) {
+  if (!offer) {
     return res
       .status(HttpCode.NOT_FOUND)
       .send(`Объявление с id ${offerId} не найдено`);
   }
 
-  res.locals.ad = ad;
+  res.locals.offer = offer;
 
   return next();
 };

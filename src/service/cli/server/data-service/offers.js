@@ -4,38 +4,38 @@ const {nanoid} = require(`nanoid`);
 const {MAX_ID_LENGTH} = require(`../../../../constants`);
 
 class OffersService {
-  constructor(ads) {
-    this._ads = ads;
+  constructor(offers) {
+    this._offers = offers;
   }
 
   findAll() {
-    return this._ads;
+    return this._offers;
   }
 
   findOne(id) {
-    return this._ads.find((ad) => ad.id === id);
+    return this._offers.find((offer) => offer.id === id);
   }
 
   create(data) {
-    const newAd = {id: nanoid(MAX_ID_LENGTH), comments: [], ...data};
+    const newOffer = {id: nanoid(MAX_ID_LENGTH), comments: [], ...data};
 
-    this._ads.push(newAd);
+    this._offers.push(newOffer);
 
-    return newAd;
+    return newOffer;
   }
 
-  update(id, adData) {
-    const oldAdIndex = this._ads.findIndex((ad) => ad.id === id);
+  update(id, offerData) {
+    const oldOfferIndex = this._offers.findIndex((offer) => offer.id === id);
 
-    this._ads[oldAdIndex] = {...this._ads[oldAdIndex], ...adData};
+    this._offers[oldOfferIndex] = {...this._offers[oldOfferIndex], ...offerData};
 
-    return this._ads[oldAdIndex];
+    return this._offers[oldOfferIndex];
   }
 
   delete(id) {
-    const deletingOfferIndex = this._ads.findIndex((offer) => offer.id === id);
+    const deletingOfferIndex = this._offers.findIndex((offer) => offer.id === id);
 
-    return this._ads.splice(deletingOfferIndex, 1);
+    return this._offers.splice(deletingOfferIndex, 1);
   }
 }
 

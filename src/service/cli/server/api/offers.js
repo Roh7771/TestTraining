@@ -10,27 +10,27 @@ const route = new Router();
 
 module.exports = (app, offersService, commentsService) => {
   route.get(`/`, (req, res) => {
-    const ads = offersService.findAll();
-    res.status(HttpCode.OK).json(ads);
+    const offers = offersService.findAll();
+    res.status(HttpCode.OK).json(offers);
   });
 
   route.get(`/:offerId`, offerExists(offersService), (req, res) => {
-    const {ad} = res.locals;
+    const {offer} = res.locals;
 
-    res.status(HttpCode.OK).json(ad);
+    res.status(HttpCode.OK).json(offer);
   });
 
   route.post(`/`, offerValidator, (req, res) => {
-    const newAd = offersService.create(req.body);
+    const newOffer = offersService.create(req.body);
 
-    return res.status(HttpCode.CREATED).json(newAd);
+    return res.status(HttpCode.CREATED).json(newOffer);
   });
 
   route.put(`/:offerId`, [offerExists(offersService), offerValidator], (req, res) => {
     const {offerId} = req.params;
-    const updatedAd = offersService.update(offerId, req.body);
+    const updatedOffer = offersService.update(offerId, req.body);
 
-    return res.status(HttpCode.OK).json(updatedAd);
+    return res.status(HttpCode.OK).json(updatedOffer);
   });
 
   route.delete(`/:offerId`, offerExists(offersService), (req, res) => {
@@ -41,18 +41,18 @@ module.exports = (app, offersService, commentsService) => {
   });
 
   route.get(`/:offerId/comments`, offerExists(offersService), (req, res) => {
-    const {ad} = res.locals;
+    const {offer} = res.locals;
 
-    const comments = commentsService.findAll(ad);
+    const comments = commentsService.findAll(offer);
 
     return res.status(HttpCode.OK).json(comments);
   });
 
   route.delete(`/:offerId/comments/:commentId`, offerExists(offersService), (req, res) => {
-    const {ad} = res.locals;
+    const {offer} = res.locals;
     const {commentId} = req.params;
 
-    const deletedComment = commentsService.delete(ad, commentId);
+    const deletedComment = commentsService.delete(offer, commentId);
 
     if (!deletedComment) {
       return res.status(HttpCode.NOT_FOUND).send(`Комментарий с id ${commentId} не найден`);
@@ -62,9 +62,8 @@ module.exports = (app, offersService, commentsService) => {
   });
 
   route.post(`/:offerId/comments`, [offerExists(offersService), commentValidator], (req, res) => {
-    const {ad} = res.locals;
-    console.log(ad);
-    const newComment = commentsService.create(ad, req.body);
+    const {offer} = res.locals;
+    const newComment = commentsService.create(offer, req.body);
 
     return res.status(HttpCode.OK).json(newComment);
   });

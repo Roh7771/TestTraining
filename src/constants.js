@@ -16,7 +16,7 @@ exports.DataFileName = {
   comments: `data/comments.txt`,
 };
 
-exports.MAX_ADS_NUMBER = 1000;
+exports.MAX_OFFERS_NUMBER = 1000;
 
 exports.DEFAULT_PORT = 3000;
 
@@ -37,7 +37,7 @@ exports.HttpCode = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
-exports.AdType = {
+exports.OfferType = {
   OFFER: `offer`,
   SALE: `sale`,
 };
@@ -61,7 +61,7 @@ exports.CommentRestrict = {
 
 exports.MOCKS_FILE_NAME = `mocks.json`;
 
-exports.DEFAULT_AD_AMOUNT = 1;
+exports.DEFAULT_OFFER_AMOUNT = 1;
 
 exports.HELP_MESSAGE = `
 Программа запускает http-сервер и формирует файл с данными для API.
