@@ -2,11 +2,11 @@
 
 const {HttpCode} = require(`../../../../constants`);
 
-const offerRequiredKeys = [`category`, `description`, `picture`, `title`, `type`, `sum`];
+const commentRequiredKeys = [`text`];
 
 module.exports = (req, res, next) => {
-  const offerKeys = Object.keys(req.body);
-  const isKeysMatch = offerRequiredKeys.every((key) => offerKeys.includes(key));
+  const commentKeys = Object.keys(req.body);
+  const isKeysMatch = commentRequiredKeys.every((key) => commentKeys.includes(key));
 
   if (!isKeysMatch) {
     return res.status(HttpCode.BAD_REQUEST).send(`Неверные данные`);

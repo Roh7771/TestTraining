@@ -1,7 +1,7 @@
 "use strict";
 
-const {nanoid} = require("nanoid");
-const { MAX_ID_LENGTH } = require("../../../../constants");
+const {nanoid} = require(`nanoid`);
+const {MAX_ID_LENGTH} = require(`../../../../constants`);
 
 class OffersService {
   constructor(ads) {
@@ -17,7 +17,7 @@ class OffersService {
   }
 
   create(data) {
-    const newAd = {id: nanoid(MAX_ID_LENGTH), ...data};
+    const newAd = {id: nanoid(MAX_ID_LENGTH), comments: [], ...data};
 
     this._ads.push(newAd);
 
@@ -30,6 +30,12 @@ class OffersService {
     this._ads[oldAdIndex] = {...this._ads[oldAdIndex], ...adData};
 
     return this._ads[oldAdIndex];
+  }
+
+  delete(id) {
+    const deletingOfferIndex = this._ads.findIndex((offer) => offer.id === id);
+
+    return this._ads.splice(deletingOfferIndex, 1);
   }
 }
 

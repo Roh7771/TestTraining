@@ -1,14 +1,14 @@
 "use strict";
 
-const { HttpCode } = require("../../../../constants");
+const {HttpCode} = require(`../../../../constants`);
 
 module.exports = (service) => (req, res, next) => {
-  const { offerId } = req.params;
+  const {offerId} = req.params;
 
   const ad = service.findOne(offerId);
 
   if (!ad) {
-    res
+    return res
       .status(HttpCode.NOT_FOUND)
       .send(`Объявление с id ${offerId} не найдено`);
   }
