@@ -11,5 +11,5 @@ module.exports = (app, service) => {
     res.status(HttpCode.OK).json(categories);
   });
 
-  app.use(`/category`, route);
+  app.use(`/categories`, route);
 };

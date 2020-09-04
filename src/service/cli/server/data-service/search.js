@@ -6,9 +6,9 @@ class SearchService {
   }
 
   findAll(searchText) {
-    return this._offers.filter((offer) => {
-      return offer.title.toLowerCase().includes(searchText.toLowerCase());
-    });
+    return this._offers.filter((offer) =>
+      offer.title.toLowerCase().includes(searchText.toLowerCase())
+    );
   }
 }
 

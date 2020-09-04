@@ -16,8 +16,8 @@ class OffersService {
     return this._offers.find((offer) => offer.id === id);
   }
 
-  create(data) {
-    const newOffer = {id: nanoid(MAX_ID_LENGTH), comments: [], ...data};
+  create(offerData) {
+    const newOffer = {id: nanoid(MAX_ID_LENGTH), comments: [], ...offerData};
 
     this._offers.push(newOffer);
 

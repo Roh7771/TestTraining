@@ -1,6 +1,6 @@
 "use strict";
 
-const {HttpCode} = require(`../../../../constants`);
+const {HttpCode, ResponceMessage} = require(`../../../../constants`);
 
 module.exports = (service) => (req, res, next) => {
   const {offerId} = req.params;
@@ -10,7 +10,7 @@ module.exports = (service) => (req, res, next) => {
   if (!offer) {
     return res
       .status(HttpCode.NOT_FOUND)
-      .send(`Объявление с id ${offerId} не найдено`);
+      .send(ResponceMessage.DATA_NOT_FOUND);
   }
 
   res.locals.offer = offer;

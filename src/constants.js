@@ -24,6 +24,15 @@ exports.DEFAULT_EXPRESS_PORT = 8080;
 
 exports.NOT_FOUND_MESSAGE = `Ничего не найдено`;
 
+exports.ResponceMessage = {
+  DATA_NOT_FOUND: `Данные не найдены`,
+  API_ROUTE_NOT_FOUND: `Маршрут не найден`,
+  PAGE_NOT_FOUND: `Страница не найдена`,
+  BAD_REQUEST: `Получены неверные данные`,
+};
+
+exports.API_PREFIX = `/api`;
+
 exports.MAX_ID_LENGTH = 6;
 
 exports.HttpCode = {
@@ -76,6 +85,7 @@ exports.HELP_MESSAGE = `
   --server <port>       запускает веб-сервер на указаном порте
 `;
 
-exports.PUBLIC_DIR = `public`;
-
-exports.TEMPLATES_DIR = `templates`;
+exports.DirPath = {
+  PUBLIC: `public`,
+  TEMPLATES: `templates`,
+};

@@ -14,8 +14,8 @@ class CommentsService {
     return commentIndex === -1 ? null : offer.comments.splice(commentIndex, 1);
   }
 
-  create(offer, data) {
-    const newComment = {id: nanoid(MAX_ID_LENGTH), ...data};
+  create(offer, commentData) {
+    const newComment = {id: nanoid(MAX_ID_LENGTH), ...commentData};
 
     offer.comments.push(newComment);
 

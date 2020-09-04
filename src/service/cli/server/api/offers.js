@@ -11,13 +11,13 @@ const route = new Router();
 module.exports = (app, offersService, commentsService) => {
   route.get(`/`, (req, res) => {
     const offers = offersService.findAll();
-    res.status(HttpCode.OK).json(offers);
+    return res.status(HttpCode.OK).json(offers);
   });
 
   route.get(`/:offerId`, offerExists(offersService), (req, res) => {
     const {offer} = res.locals;
 
-    res.status(HttpCode.OK).json(offer);
+    return res.status(HttpCode.OK).json(offer);
   });
 
   route.post(`/`, offerValidator, (req, res) => {
@@ -35,9 +35,9 @@ module.exports = (app, offersService, commentsService) => {
 
   route.delete(`/:offerId`, offerExists(offersService), (req, res) => {
     const {offerId} = req.params;
-    const deletingOffer = offersService.delete(offerId);
+    const deletedOffer = offersService.delete(offerId);
 
-    return res.status(HttpCode.OK).json(deletingOffer);
+    return res.status(HttpCode.OK).json(deletedOffer);
   });
 
   route.get(`/:offerId/comments`, offerExists(offersService), (req, res) => {
