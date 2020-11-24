@@ -1,13 +1,15 @@
 "use strict";
 
 const chalk = require(`chalk`);
+const {PictureRestrict} = require(`./constants`);
 const fs = require(`fs`).promises;
 
-exports.getRandomInt = (min, max) => {
+const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+exports.getRandomInt = getRandomInt;
 
 exports.shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -17,7 +19,6 @@ exports.shuffle = (array) => {
       array[i],
     ];
   }
-
   return array;
 };
 
@@ -32,4 +33,52 @@ exports.readContent = async (fileName) => {
     console.log(chalk.red(`Не удалось прочитать файл с данными`));
     return [];
   }
+};
+
+exports.buildQueryString = (o) => {
+  const keys = Object.keys(o);
+
+  let queryString = `?`;
+
+  if (keys.length === 0) {
+    return queryString;
+  }
+
+  keys.forEach((key) => {
+    let value = o[key];
+    let arrayString = ``;
+    if (Array.isArray(value)) {
+      value.forEach((arrayValue) => {
+        arrayString = `${arrayString}${key}=${arrayValue}&`;
+      });
+      queryString = `${queryString}${arrayString}`;
+      return;
+    }
+    queryString = `${queryString}${key}=${value}&`;
+  });
+
+  return queryString.slice(0, -1);
+};
+
+exports.getPictureFileName = () => {
+  let number = getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX);
+
+  number = number < 10 ? `0${number}` : number;
+
+  return `item${number}.jpg`;
+};
+
+exports.getCreatedDate = () => {
+  const currentDate = new Date();
+  const maxMilliseconds = currentDate.getTime();
+  const minMilliseconds = new Date().setMonth(currentDate.getMonth() - 3);
+
+  const createdDateMilliseconds = getRandomInt(
+      minMilliseconds,
+      maxMilliseconds
+  );
+
+  const date = new Date(createdDateMilliseconds);
+
+  return date.toISOString();
 };

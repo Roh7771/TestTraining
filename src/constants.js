@@ -14,26 +14,14 @@ exports.DataFileName = {
   categories: `data/categories.txt`,
   sentences: `data/sentences.txt`,
   comments: `data/comments.txt`,
+  firstNames: `data/firstnames.txt`,
+  lastNames: `data/lastnames.txt`
 };
 
 exports.MAX_OFFERS_NUMBER = 1000;
 
-exports.DEFAULT_PORT = 3000;
-
-exports.DEFAULT_EXPRESS_PORT = 8080;
-
 exports.NOT_FOUND_MESSAGE = `Ничего не найдено`;
-
-exports.ResponceMessage = {
-  DATA_NOT_FOUND: `Данные не найдены`,
-  API_ROUTE_NOT_FOUND: `Маршрут не найден`,
-  PAGE_NOT_FOUND: `Страница не найдена`,
-  BAD_REQUEST: `Получены неверные данные`,
-};
-
-exports.API_PREFIX = `/api`;
-
-exports.MAX_ID_LENGTH = 6;
+exports.SERVER_ERROR_MESSAGE = `Ошибка на стороне сервера`;
 
 exports.HttpCode = {
   OK: 200,
@@ -63,14 +51,27 @@ exports.PictureRestrict = {
   MAX: 16,
 };
 
+exports.MOCKS_FILE_NAME = `mocks.json`;
+
+exports.FILL_DB_FILE_NAME = `fill-db.sql`;
+
+exports.DEFAULT_OFFER_AMOUNT = 1;
+
+exports.ResponseMessage = {
+  DATA_NOT_FOUND: `Данные не найдены`,
+  API_ROUTE_NOT_FOUND: `Маршрут не найден`,
+  PAGE_NOT_FOUND: `Страница не найдена`,
+  BAD_REQUEST: `Получены неверные данные`,
+};
+
+exports.API_PREFIX = `/api`;
+
+exports.MAX_ID_LENGTH = 6;
+
 exports.CommentRestrict = {
   MAX_SENTENCES_AMOUNT: 3,
   MAX_COMMENTS_AMOUNT: 5,
 };
-
-exports.MOCKS_FILE_NAME = `mocks.json`;
-
-exports.DEFAULT_OFFER_AMOUNT = 1;
 
 exports.HELP_MESSAGE = `
 Программа запускает http-сервер и формирует файл с данными для API.
@@ -83,9 +84,16 @@ exports.HELP_MESSAGE = `
   --help:               печатает этот текст
   --generate <count>    формирует файл mocks.json
   --server <port>       запускает веб-сервер на указаном порте
+  --fill <count>        создает sql-файл c запросами для заполнения базы данных
 `;
 
 exports.DirPath = {
   PUBLIC: `public`,
   TEMPLATES: `templates`,
+  UPDATE: `upload`,
+};
+
+module.exports.Env = {
+  DEVELOPMENT: `development`,
+  PRODUCTION: `production`,
 };

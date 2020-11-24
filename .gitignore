@@ -11,6 +11,7 @@ Thumbs.db
 *.log*
 node_modules/
 *.http
+.env
 
 # Папка с собранными файлами проекта
 build/
@@ -18,3 +19,6 @@ build/
 # Моковые данные
 mocks.json
 
+# Директория с загруженными изображениями
+src/express/upload/img/*.*
+!src/express/upload/img/.gitkeep
