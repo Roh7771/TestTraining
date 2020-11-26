@@ -23,6 +23,13 @@ class SearchService {
             attributes: [`id`, `firstName`, `lastName`, `email`],
           },
         },
+        {
+          model: db.Category,
+          as: `categories`,
+          through: {
+            attributes: [],
+          },
+        },
       ],
     });
 
