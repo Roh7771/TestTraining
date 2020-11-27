@@ -9,9 +9,9 @@ class SearchService {
         getSequelizeQueryOptions(`Offer`, db)
     );
 
-    return offers.filter((offer) => {
-      return offer.title.toLowerCase().includes(searchText.toLowerCase());
-    });
+    return offers.filter((offer) =>
+      offer.title.toLowerCase().includes(searchText.toLowerCase())
+    );
   }
 }
 

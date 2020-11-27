@@ -14,10 +14,7 @@ exports.getRandomInt = getRandomInt;
 exports.shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const randomPosition = Math.floor(Math.random() * i);
-    [array[i], array[randomPosition]] = [
-      array[randomPosition],
-      array[i],
-    ];
+    [array[i], array[randomPosition]] = [array[randomPosition], array[i]];
   }
   return array;
 };
@@ -82,3 +79,21 @@ exports.getCreatedDate = () => {
 
   return date.toISOString();
 };
+
+exports.catchAsync = (fn) => {
+  return (req, res, next) => {
+    fn(req, res, next).catch((err) => next(err));
+  };
+};
+
+class AppError extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+    this.isOperational = true;
+
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+exports.AppError = AppError;
