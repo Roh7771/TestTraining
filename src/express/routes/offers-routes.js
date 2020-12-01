@@ -5,7 +5,7 @@ const api = require(`../api`).getAPI();
 const multer = require(`multer`);
 const path = require(`path`);
 const {nanoid} = require(`nanoid`);
-const {buildQueryString} = require(`../../utils`);
+const {buildQueryString, catchAsync} = require(`../../utils`);
 
 const UPLOAD_DIR = `../upload/img/`;
 
@@ -33,14 +33,14 @@ offersRouter.get(`/add`, async (req, res) => {
   });
 });
 
-offersRouter.get(`/edit/:id`, async (req, res) => {
+offersRouter.get(`/edit/:id`, catchAsync(async (req, res) => {
   const {id} = req.params;
   const [offer, categories] = await Promise.all([
     api.getOffer(id),
     api.getCategories(),
   ]);
   res.render(`ticket-edit`, {offer, categories});
-});
+}));
 
 offersRouter.get(`/:id`, (req, res) => res.render(`ticket`));
 
@@ -49,10 +49,11 @@ offersRouter.post(`/add`, upload.single(`picture`), async (req, res) => {
   const offerData = {
     title: body.title,
     description: body.description,
-    type: body.type,
-    sum: body.sum,
-    picture: file.filename,
+    typeId: body.typeId,
+    cost: body.cost,
+    picture: file ? file.filename : `item01.jpg`,
     category: body.category,
+    userId: 1
   };
   if (typeof offerData.category === `string`) {
     offerData.category = [offerData.category];

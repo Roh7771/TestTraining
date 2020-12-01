@@ -31,7 +31,6 @@ class OffersService {
       returning: true
     });
 
-    console.log(result);
     if (offerData.category) {
       const offer = await db.Offer.findByPk(id);
       await offer.setCategories(offerData.category);
