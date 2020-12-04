@@ -146,3 +146,5 @@ exports.DBErrorName = {
   DATABASE_ERROR: `SequelizeDatabaseError`,
   VALIDATION_ERROR: `SequelizeValidationError`
 };
+
+exports.PAGE_OFFSET = 8;
