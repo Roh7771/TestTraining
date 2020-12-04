@@ -1,38 +1,38 @@
 "use strict";
 
 const {getSequelizeQueryOptions} = require(`../../../../constants`);
-const {db} = require(`../db/db`);
 
 class OffersService {
-  constructor(offers) {
-    this._offers = offers;
+  constructor(db) {
+    this._db = db;
   }
 
   async findAll() {
-    return await db.Offer.findAll(getSequelizeQueryOptions(`Offer`, db));
+    return await this._db.Offer.findAll(getSequelizeQueryOptions(`Offer`, this._db));
   }
 
   async findOne(id) {
-    return await db.Offer.findByPk(id, getSequelizeQueryOptions(`Offer`, db));
+    return await this._db.Offer.findByPk(id, getSequelizeQueryOptions(`Offer`, this._db));
   }
 
   async create(offerData) {
-    const newOffer = await db.Offer.create(offerData);
+    const newOffer = await this._db.Offer.create(offerData);
+
     await newOffer.addCategories(offerData.category);
 
     return newOffer;
   }
 
   async update(id, offerData) {
-    const result = await db.Offer.update(offerData, {
+    const result = await this._db.Offer.update(offerData, {
       where: {
-        id
+        id,
       },
-      returning: true
+      returning: true,
     });
 
     if (offerData.category) {
-      const offer = await db.Offer.findByPk(id);
+      const offer = await this._db.Offer.findByPk(id);
       await offer.setCategories(offerData.category);
       return offer;
     }
@@ -41,10 +41,10 @@ class OffersService {
   }
 
   async delete(id) {
-    await db.Offer.destroy({
+    await this._db.Offer.destroy({
       where: {
-        id
-      }
+        id,
+      },
     });
   }
 }

@@ -3,6 +3,7 @@
 const Sequelize = require(`sequelize`);
 const config = require(`../../../../config`);
 const {getLogger} = require(`../../../lib/logger`);
+
 const logger = getLogger({name: `database`});
 
 const sequelize = new Sequelize(

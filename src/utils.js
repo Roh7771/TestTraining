@@ -14,7 +14,10 @@ exports.getRandomInt = getRandomInt;
 exports.shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const randomPosition = Math.floor(Math.random() * i);
-    [array[i], array[randomPosition]] = [array[randomPosition], array[i]];
+    [array[i], array[randomPosition]] = [
+      array[randomPosition],
+      array[i],
+    ];
   }
   return array;
 };
@@ -82,7 +85,11 @@ exports.getCreatedDate = () => {
 
 exports.catchAsync = (fn) => {
   return (req, res, next) => {
-    fn(req, res, next).catch((err) => next(err));
+    try {
+      fn(req, res, next);
+    } catch (error) {
+      next(error);
+    }
   };
 };
 

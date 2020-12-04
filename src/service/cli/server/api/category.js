@@ -11,7 +11,7 @@ module.exports = (app, service) => {
       `/`,
       catchAsync(async (req, res) => {
         const categories = await service.findAll();
-        return res.status(HttpCode.OK).json(categories);
+        res.status(HttpCode.OK).json(categories);
       })
   );
 

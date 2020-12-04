@@ -25,47 +25,55 @@ const offersRouter = new Router();
 
 offersRouter.get(`/category/:id`, (req, res) => res.render(`category`));
 
-offersRouter.get(`/add`, async (req, res) => {
-  const categories = await api.getCategories();
-  res.render(`new-ticket`, {
-    categories,
-    prevOfferData: Object.keys(req.query).length === 0 ? null : req.query,
-  });
-});
+offersRouter.get(
+    `/add`,
+    catchAsync(async (req, res) => {
+      const categories = await api.getCategories();
+      res.render(`new-ticket`, {
+        categories,
+        prevOfferData: Object.keys(req.query).length === 0 ? null : req.query,
+      });
+    })
+);
 
-offersRouter.get(`/edit/:id`, catchAsync(async (req, res) => {
-  const {id} = req.params;
-  const [offer, categories] = await Promise.all([
-    api.getOffer(id),
-    api.getCategories(),
-  ]);
-  res.render(`ticket-edit`, {offer, categories});
-}));
+offersRouter.get(
+    `/edit/:id`,
+    catchAsync(async (req, res) => {
+      const {id} = req.params;
+      const [offer, categories] = await Promise.all([
+        api.getOffer(id),
+        api.getCategories(),
+      ]);
+      res.render(`ticket-edit`, {offer, categories});
+    })
+);
 
 offersRouter.get(`/:id`, (req, res) => res.render(`ticket`));
 
-offersRouter.post(`/add`, upload.single(`picture`), async (req, res) => {
-  const {body, file} = req;
-  const offerData = {
-    title: body.title,
-    description: body.description,
-    typeId: body.typeId,
-    cost: body.cost,
-    picture: file ? file.filename : `item01.jpg`,
-    category: body.category,
-    userId: 1
-  };
-  if (typeof offerData.category === `string`) {
-    offerData.category = [offerData.category];
-  }
-  try {
-    await api.createOffer(offerData);
-    res.redirect(`/my`);
-  } catch (error) {
-    res.redirect(
-        `/offers/add${buildQueryString(offerData)}`
-    );
-  }
-});
+offersRouter.post(
+    `/add`,
+    upload.single(`picture`),
+    catchAsync(async (req, res) => {
+      const {body, file} = req;
+      const offerData = {
+        title: body.title,
+        description: body.description,
+        typeId: body.typeId,
+        cost: body.cost,
+        picture: file ? file.filename : `item01.jpg`,
+        category: body.category,
+        userId: 1,
+      };
+      if (typeof offerData.category === `string`) {
+        offerData.category = [offerData.category];
+      }
+      try {
+        await api.createOffer(offerData);
+        res.redirect(`/my`);
+      } catch (error) {
+        res.redirect(`/offers/add${buildQueryString(offerData)}`);
+      }
+    })
+);
 
 module.exports = offersRouter;

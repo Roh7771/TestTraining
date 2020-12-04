@@ -5,7 +5,7 @@ const help = require(`./help`);
 const generate = require(`./generate`);
 const server = require(`./server`);
 const fill = require(`./fill`);
-const fillDb = require("./fill-db");
+const fillDb = require(`./fill-db`);
 
 const cli = {
   [version.name]: version,
